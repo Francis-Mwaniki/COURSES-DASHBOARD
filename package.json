@@ -1,0 +1,34 @@
+{
+  "name": "hajo2",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.41",
+    "vee-validate": "^4.5.8",
+    "flowbite": "^1.4.1",
+    "lodash": "^4.17.21",
+    "@vee-validate/rules": "^4.5.7",
+    "vue-router": "^4.1.5",
+    "apexcharts": "^3.34.0",
+    "chart.js": "^3.7.1",
+    "vue3-apexcharts": "^1.4.1",
+    "perfect-scrollbar": "^1.5.5",
+    "vue-chartjs": "^4.0.2",
+    "v-tables-3": "^0.4.7",
+    "smooth-scrollbar": "^8.7.4",
+    "vue-perfect-scrollbar": "^0.2.1",
+    "vue3-perfect-scrollbar": "^1.6.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.2",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.18",
+    "@iconify/vue": "^3.2.0",
+    "tailwindcss": "^3.2.1",
+    "vite": "^3.1.8"
+  }
+}
