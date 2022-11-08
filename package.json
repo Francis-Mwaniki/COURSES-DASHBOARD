@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "vue": "^3.2.41",
+    "@supabase/supabase-js": "^1.24.0",
     "vee-validate": "^4.5.8",
     "flowbite": "^1.4.1",
     "lodash": "^4.17.21",
