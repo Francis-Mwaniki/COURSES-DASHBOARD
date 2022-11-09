@@ -67,14 +67,21 @@
 
 <script>
 import { ref } from "vue";
-import { supabase } from "../supabase/init";
+import { supabase } from "../../supabase/init";
 
 export default {
   setup() {
     const title = ref("");
     const description = ref("");
 
-    const submit = async () => {};
+    const submit = async () => {
+      const { data, error } = await supabase.from("Courses").insert({
+        course: title.value,
+        description: description.value,
+      });
+      if (error) throw Error;
+      console.log(data);
+    };
     return { title, description, submit };
   },
 };
