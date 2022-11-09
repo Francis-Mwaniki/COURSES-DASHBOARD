@@ -392,7 +392,7 @@
               <td class="px-6 py-4">
                 {{ items.amount }}
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 md:block hidden">
                 <span
                   class="text-green-800 bg-green-300 px-3 py-1 rounded-md"
                   v-if="items.statusTransaction == 'completed'"
