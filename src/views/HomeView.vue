@@ -415,15 +415,15 @@
                 </a>
               </div>
               <div class="mt-6">
-                <a
-                  href="/#/signup"
+                <router-link
+                  to="/Signup"
                   class="w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700"
                 >
                   Sign up
-                </a>
+                </router-link>
                 <p class="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?
-                  <a href="/#/login" class="text-gray-900"> Sign in </a>
+                  <router-link to="/Login" class="text-gray-900"> Sign in </router-link>
                 </p>
               </div>
             </div>
@@ -465,12 +465,12 @@
                 <div
                   class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5"
                 >
-                  <a
-                    href="#"
+                  <router-link
+                    to="/Signup"
                     class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8"
                   >
                     Get started
-                  </a>
+                  </router-link>
                   <a
                     href="#"
                     class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8"
