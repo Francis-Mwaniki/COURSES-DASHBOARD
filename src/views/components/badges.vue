@@ -68,11 +68,13 @@
 <script>
 import { ref } from "vue";
 import { supabase } from "../../supabase/init";
+import { useRoute } from "vue-router";
 
 export default {
   setup() {
     const title = ref("");
     const description = ref("");
+    const currentId = useRoute().params;
 
     const submit = async () => {
       const { data, error } = await supabase.from("Courses").insert({
@@ -80,9 +82,9 @@ export default {
         description: description.value,
       });
       if (error) throw Error;
-      console.log(data);
     };
-    return { title, description, submit };
+    console.log(currentId);
+    return { title, description, submit, currentId };
   },
 };
 </script>
