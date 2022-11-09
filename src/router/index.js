@@ -11,6 +11,7 @@ import Vbutton from "../views/components/button.vue";
 import Vcard from "../views/components/card.vue";
 import Login from "../auth/Login.vue";
 import Signup from "../auth/Signup.vue";
+import UserProfile from "../auth/UserProfile.vue";
 var appname = " -App";
 import HomeView from "../views/HomeView.vue";
 
@@ -27,6 +28,12 @@ const routes = [
     name: "Login",
     component: Login,
     meta: { title: "Login" + appname },
+  },
+  {
+    path: "/UserProfile",
+    name: "UserProfile",
+    component: UserProfile,
+    meta: { title: "UserProfile" + appname },
   },
   {
     path: "/Signup",

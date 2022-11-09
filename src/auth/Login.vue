@@ -1,16 +1,32 @@
 <template>
   <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto rounded-full"
-        src="../assets/catoon.png"
-        alt="Workflow"
-      />
-      <h2
-        class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300"
-      >
-        Sign in to your account
-      </h2>
+    <div
+      class="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center"
+    >
+      <span v-if="userData">
+        <img :src="userData.user_metadata.avatar_url" class="rounded-full" alt="" />
+      </span>
+      <span v-else>
+        <img
+          class="mx-auto h-12 w-auto rounded-full"
+          src="../assets/catoon.png"
+          alt="Workflow"
+        />
+      </span>
+      <div class="">
+        <h2
+          class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300"
+          v-if="!userData"
+        >
+          Sign in to your account
+        </h2>
+        <h2
+          class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300"
+          v-else
+        >
+          Your signed as {{ userData.user_metadata.full_name }}
+        </h2>
+      </div>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
@@ -163,8 +179,21 @@
 <script>
 import { supabase } from "../supabase/init";
 import { useRouter } from "vue-router";
+import { Icon } from "@iconify/vue";
+import { ref } from "vue";
 export default {
   name: "loginForm",
+  setup() {
+    let userData = ref([]);
+    const getUser = () => {
+      const supabaseUser = supabase.auth.user();
+      userData.value = supabaseUser;
+      console.log(userData.value);
+    };
+
+    getUser();
+    return { getUser, userData };
+  },
 
   data() {
     return {

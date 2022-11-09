@@ -431,10 +431,23 @@
 
 <script>
 // @ is an alias to /src
+import { supabase } from "../supabase/init";
 import { Icon } from "@iconify/vue";
+import { ref } from "vue";
 
 export default {
   name: "Dashboard",
+  setup() {
+    let userData = ref([]);
+    const getUser = () => {
+      const supabaseUser = supabase.auth.user();
+      userData.value = supabaseUser;
+      console.log(userData.value);
+    };
+
+    getUser();
+    return { getUser, userData };
+  },
   data() {
     return {
       // for more guide apexchart.js

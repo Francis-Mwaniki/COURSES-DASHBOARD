@@ -1,21 +1,30 @@
 <template>
   <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto rounded-full"
-        src="../assets/catoon.png"
-        alt="Workflow"
-      />
+    <div
+      class="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center"
+    >
+      <span v-if="userData">
+        <img :src="userData.user_metadata.avatar_url" class="rounded-full" alt="" />
+      </span>
+      <span v-else>
+        <img
+          class="mx-auto h-12 w-auto rounded-full"
+          src="../assets/catoon.png"
+          alt="Workflow"
+        />
+      </span>
       <h2
         class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300"
+        v-if="!userData"
       >
         Sign in to your account
       </h2>
-      <!--   <img
-        :src=" "
-        class="h-11 w-11 rounded-full"
-        alt=""
-      /> -->
+      <h2
+        class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300"
+        v-else
+      >
+        Your signed as {{ userData.user_metadata.full_name }}
+      </h2>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
@@ -24,7 +33,7 @@
         class="danger-alert bg-red-500 flex py-3 px-5 text-white w-full box-border rounded-md"
       >
         <span class="text-2xl mr-3">
-          <Icon icon="ic:outline-dangerous" />
+          <Icon icon="ic:outline-dangerous" class="text-white" />
         </span>
         <span> {{ errorMsg }}</span>
       </div>
@@ -223,6 +232,7 @@
 
 <script>
 import { ref } from "vue";
+import { Icon } from "@iconify/vue";
 import { supabase } from "../supabase/init";
 import { useRouter } from "vue-router";
 export default {
@@ -236,6 +246,8 @@ export default {
     const confirmPassword = ref(null);
     const errorMsg = ref(null);
     const statusMsg = ref(null);
+    let userData = ref([]);
+
     // Register function
     const register = async () => {
       if (password.value !== confirmPassword.value) {
@@ -275,7 +287,7 @@ export default {
         const { data, session, error } = await supabase.auth.signIn({
           provider: "google",
           options: {
-            redirectTo: "/Login",
+            redirectTo: "http://localhost:5713/Login",
           },
         });
 
@@ -288,10 +300,11 @@ export default {
     };
     const getUser = () => {
       const supabaseUser = supabase.auth.user();
-
-      console.log(supabaseUser);
+      userData.value = supabaseUser;
+      console.log(userData.value);
     };
     getUser();
+
     return {
       email,
       password,
@@ -301,6 +314,7 @@ export default {
       register,
       handleSignInWithGoogle,
       getUser,
+      userData,
     };
   },
   methods: {},

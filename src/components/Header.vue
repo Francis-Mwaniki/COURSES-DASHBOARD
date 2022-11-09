@@ -25,8 +25,15 @@
         </button>
         <h2
           class="text-md text-indigo-800 ml-3 lg:block hidden px-5 p-2 rounded-md bg-indigo-200"
+          v-if="userData"
         >
-          Welcome back, Francis
+          Welcome back, {{ userData.user_metadata.full_name }}
+        </h2>
+        <h2
+          v-else
+          class="text-md text-indigo-800 ml-3 lg:block hidden px-5 p-2 rounded-md bg-indigo-200"
+        >
+          Not signed in
         </h2>
       </div>
       <div class="mr-5 flex">
@@ -78,11 +85,20 @@
           <div
             class="user-avatar flex hover:bg-gray-100 dark:hover:bg-gray-700 p-1 cursor-pointer rounded-md"
           >
-            <img
-              src="../assets/img/user.jpg"
-              class="rounded-full mr-4 w-10 h-10 p-1 ring-1 ring-gray-300 dark:ring-gray-500"
-              alt=""
-            />
+            <span v-if="userData">
+              <img
+                :src="userData.user_metadata.avatar_url"
+                class="rounded-full mr-4 w-10 h-10 p-1 ring-1 ring-gray-300 dark:ring-gray-500"
+                alt=""
+              />
+            </span>
+            <span v-else>
+              <img
+                src="../assets/img/user.jpg"
+                class="rounded-full mr-4 w-10 h-10 p-1 ring-1 ring-gray-300 dark:ring-gray-500"
+                alt=""
+              />
+            </span>
             <span class="text-md mt-4 text-gray-300"
               ><Icon icon="bi:caret-down-fill"
             /></span>
@@ -104,8 +120,10 @@
               aria-labelledby="dropdownSmallButton"
             >
               <li>
-                <a href="#" class="block py-2 px-4 0 hover:bg-primary hover:text-white"
-                  >User Profile</a
+                <router-link
+                  to="/UserProfile"
+                  class="block py-2 px-4 0 hover:bg-primary hover:text-white"
+                  >User Profile</router-link
                 >
               </li>
               <li>
@@ -120,11 +138,12 @@
               </li>
             </ul>
             <div class="py-1">
-              <a
-                href="#"
+              <button
+                @click="signout"
                 class="block py-2 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white"
-                >Sign out</a
               >
+                Sign out
+              </button>
             </div>
           </div>
         </transition>
@@ -135,7 +154,26 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import { supabase } from "../supabase/init";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
+  setup() {
+    let userData = ref([]);
+    const router = useRouter();
+    const getUser = () => {
+      const supabaseUser = supabase.auth.user();
+      userData.value = supabaseUser;
+      console.log(userData.value);
+    };
+    async function signout() {
+      const { error } = await supabase.auth.signOut();
+      router.push("/Login");
+    }
+
+    getUser();
+    return { getUser, userData, signout };
+  },
   data() {
     return {
       menu: false,
