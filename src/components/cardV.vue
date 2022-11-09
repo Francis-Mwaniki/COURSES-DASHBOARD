@@ -47,8 +47,7 @@
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 {{ course.description }}
               </p>
-              <router-link
-                :to="{ name: 'Vbadge', params: { id: course.id } }"
+              <a
                 class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Read more
@@ -64,7 +63,7 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-              </router-link>
+              </a>
             </div>
           </div>
         </div>
@@ -73,13 +72,12 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { supabase } from "../supabase/init";
 import { useRoute } from "vue-router";
 export default {
   setup() {
     const route = useRoute();
-    const currentId = route.params;
     const fetchedData = ref([]);
     const getCourses = async () => {
       const { data, error } = await supabase.from("Courses").select("*");
@@ -93,7 +91,13 @@ export default {
       console.log(fetchedData);
     }; */
     console.log(route);
+
     getCourses();
+
+    const getId = computed(() => {
+      fetchedData.value.filter((useriD) => console.log(useriD.id));
+    });
+
     return { getCourses, fetchedData };
   },
 };

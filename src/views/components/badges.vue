@@ -52,13 +52,66 @@
             placeholder="content..."
             v-model="description"
           ></textarea>
-          <button
-            class="px-4 py-1.5 rounded-md shadow-lg bg-indigo-600 font-medium text-gray-100 block transition duration-300"
-            type="submit"
-          >
-            <span class="hidden">Processing</span>
-            <span class="dark:text-white">Add Course<span id="subtotal"></span></span>
-          </button>
+          <div :class="[log_error ? 'hidden' : 'block']">
+            <button
+              type="submit"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              :class="[log_in_submission ? 'bg-gray-400 hover:bg-slate-400' : '']"
+              :disabled="log_in_submission"
+            >
+              <svg
+                v-if="log_show_alert"
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              {{ log_show_alert ? "Processing..." : "login" }}
+            </button>
+          </div>
+          <div v-show="log_error" :class="[log_error ? 'hidden' : 'block']">
+            <button
+              type="submit"
+              class="animate-pulse w-full flex justify-center py-2 px-4 border border-transparent text-red-700 bg-red-100 rounded-md shadow-sm text-sm font-medium"
+            >
+              <svg
+                v-if="log_show_alert"
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-red-700 bg-transparent"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Unexpected Error occured, please refresh
+            </button>
+          </div>
         </form>
       </div>
     </section>
@@ -74,17 +127,32 @@ export default {
   setup() {
     const title = ref("");
     const description = ref("");
-    const currentId = useRoute().params;
+    const log_in_submission = ref(false);
+    const log_show_alert = ref(false);
+    const log_error = ref(false);
 
     const submit = async () => {
+      log_in_submission.value = true;
+      log_show_alert.value = true;
       const { data, error } = await supabase.from("Courses").insert({
         course: title.value,
         description: description.value,
       });
-      if (error) throw Error;
+      if (error) {
+        log_in_submission.value = false;
+        log_show_alert = false;
+        throw Error;
+      }
     };
-    console.log(currentId);
-    return { title, description, submit, currentId };
+
+    return {
+      title,
+      description,
+      submit,
+      log_in_submission,
+      log_error,
+      log_show_alert,
+    };
   },
 };
 </script>

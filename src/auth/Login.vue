@@ -210,6 +210,8 @@ export default {
   methods: {
     async login() {
       const router = useRouter();
+      this.log_in_submission = true;
+      this.log_show_alert = true;
       try {
         const { error } = await supabase.auth.signUp({
           email: this.email,
@@ -217,6 +219,8 @@ export default {
         });
         if (error) {
           this.errorMsg = error.message;
+          this.log_in_submission = true;
+          this.log_show_alert = true;
         } else {
           this.statusMsg = "Welcome your are authenticated!";
           setTimeout(() => {
@@ -224,6 +228,8 @@ export default {
           }, 4000);
         }
       } catch (error) {
+        this.log_in_submission = true;
+        this.log_show_alert = true;
         this.errorMsg = error.message;
         setTimeout(() => {
           this.errorMsg = null;
