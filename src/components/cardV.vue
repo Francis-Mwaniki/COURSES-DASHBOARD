@@ -10,7 +10,7 @@
         Tailwind CSS breadcrumb components
       </p>
     </div>
-    <div class="grid grid-cols-2 mt-10 gap-5">
+    <div class="grid grid-cols-3 mt-10 gap-5" v-for="course in fetchedData" :key="course">
       <div class="card w-full p-5 rounded-md bg-white dark:bg-gray-800">
         <h2 class="dark:text-gray-200">Coding</h2>
         <div class="wrapper-button w-full box-border mt-4">
@@ -29,12 +29,11 @@
                 <h5
                   class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
                 >
-                  Noteworthy technology acquisitions 2021
+                  {{ course.course }}
                 </h5>
               </a>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions of 2021 so far, in
-                reverse chronological order.
+                {{ course.description }}
               </p>
               <a
                 href="#"
@@ -70,11 +69,11 @@ export default {
     const getCourses = async () => {
       const { data, error } = await supabase.from("Courses").select("*");
       if (error) throw Error;
-      fetchedData.value = data.toString();
+      fetchedData.value.push(data[0]);
       console.log(fetchedData);
     };
     getCourses();
-    return { getCourses };
+    return { getCourses, fetchedData };
   },
 };
 </script>
