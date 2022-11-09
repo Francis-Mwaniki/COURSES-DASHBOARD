@@ -10,6 +10,14 @@
         Tailwind CSS breadcrumb components
       </p>
     </div>
+    <router-link to="/component/badge">
+      <button
+        class="flex justify-end items-center bg-indigo-700 text-white rounded-md px-8 py-2"
+      >
+        Add Course
+      </button>
+    </router-link>
+
     <div class="grid grid-cols-3 mt-10 gap-5">
       <div
         class="card w-full p-5 rounded-md bg-white dark:bg-gray-800"
