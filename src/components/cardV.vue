@@ -10,8 +10,12 @@
         Tailwind CSS breadcrumb components
       </p>
     </div>
-    <div class="grid grid-cols-3 mt-10 gap-5" v-for="course in fetchedData" :key="course">
-      <div class="card w-full p-5 rounded-md bg-white dark:bg-gray-800">
+    <div class="grid grid-cols-3 mt-10 gap-5">
+      <div
+        class="card w-full p-5 rounded-md bg-white dark:bg-gray-800"
+        v-for="course in fetchedData[0]"
+        :key="course"
+      >
         <h2 class="dark:text-gray-200">Coding</h2>
         <div class="wrapper-button w-full box-border mt-4">
           <div
@@ -69,7 +73,7 @@ export default {
     const getCourses = async () => {
       const { data, error } = await supabase.from("Courses").select("*");
       if (error) throw Error;
-      fetchedData.value.push(data[0]);
+      fetchedData.value.push(data);
       console.log(fetchedData);
     };
     getCourses();
