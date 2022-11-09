@@ -48,7 +48,7 @@
             <template v-slot:icon>
               <Icon icon="gg:components" />
             </template>
-            <template v-slot:title> Components </template>
+            <template v-slot:title> Features </template>
             <template v-slot:content>
               <router-link
                 to="/component/alert"
