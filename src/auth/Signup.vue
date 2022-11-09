@@ -243,6 +243,7 @@ export default {
     const router = useRouter();
     const email = ref();
     const password = ref(null);
+    const phone = ref(null);
     const confirmPassword = ref(null);
     const errorMsg = ref(null);
     const statusMsg = ref(null);
@@ -303,11 +304,13 @@ export default {
       userData.value = supabaseUser;
       console.log(userData.value);
     };
+
     getUser();
 
     return {
       email,
       password,
+
       confirmPassword,
       errorMsg,
       statusMsg,
