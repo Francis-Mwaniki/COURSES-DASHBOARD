@@ -62,7 +62,19 @@
   </div>
 </template>
 <script>
+import { ref } from "vue";
+import { supabase } from "../supabase/init";
 export default {
-  setup() {},
+  setup() {
+    const fetchedData = ref([]);
+    const getCourses = async () => {
+      const { data, error } = await supabase.from("Courses").select("*");
+      if (error) throw Error;
+      fetchedData.value = data.toString();
+      console.log(fetchedData);
+    };
+    getCourses();
+    return { getCourses };
+  },
 };
 </script>
