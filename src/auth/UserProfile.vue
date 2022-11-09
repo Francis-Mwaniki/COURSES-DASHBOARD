@@ -9,18 +9,11 @@
           class="dark:bg-slate-800 bg-slate-400 relative shadow rounded-lg w-5/6 md:w-4/6 lg:w-3/6 xl:w-2/6 mx-auto"
         >
           <div class="flex justify-center flex-col mx-auto items-center">
-            <span v-if="userData">
+            <span>
               <img
                 :src="userData.user_metadata.avatar_url"
                 alt=""
                 class="rounded-full mx-auto flex justify-center items-center absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
-              />
-            </span>
-            <span v-else>
-              <img
-                src="../assets/images/catoon.png"
-                alt=""
-                class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
               />
             </span>
           </div>
@@ -75,11 +68,6 @@
                 <a
                   class="w-full border-t border-gray-100 dark:text-gray-300 text-gray-700 py-4 pl-6 pr-3 w-full block dark:hover:bg-indigo-600 hover:bg-indigo-400 transition duration-150"
                 >
-                  <img
-                    src="../assets/images/catoon.png"
-                    alt=""
-                    class="rounded-full h-6 shadow-md inline-block mr-2 dark:text-gray-300 text-gray-700"
-                  />
                   Updated his status
                   <span class="dark:text-gray-300 text-gray-700 text-xs">24 min ago</span>
                 </a>
