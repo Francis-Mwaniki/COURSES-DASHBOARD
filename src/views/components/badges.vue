@@ -121,10 +121,11 @@
 <script>
 import { ref } from "vue";
 import { supabase } from "../../supabase/init";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter();
     const title = ref("");
     const description = ref("");
     const log_in_submission = ref(false);
@@ -138,6 +139,7 @@ export default {
         course: title.value,
         description: description.value,
       });
+      router.push("/component/alert");
       if (error) {
         log_in_submission.value = false;
         log_show_alert = false;
