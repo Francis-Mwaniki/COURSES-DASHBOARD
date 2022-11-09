@@ -41,7 +41,7 @@
       </div>
       <div
         v-if="statusMsg"
-        class="m-2 p-4 rounded-md bg-light-grey shadow-lg border-l-8 border-green-500"
+        class="m-2 p-4 rounded-md bg-light-grey shadow-lg border-l-8 text-white border-green-500"
       >
         <p class="text-blue">{{ statusMsg }}</p>
       </div>

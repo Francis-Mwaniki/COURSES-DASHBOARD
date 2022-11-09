@@ -247,10 +247,15 @@ export default {
     const confirmPassword = ref(null);
     const errorMsg = ref(null);
     const statusMsg = ref(null);
+    const log_in_submission = ref(false);
+    const log_show_alert = ref(false);
+    const log_error = ref(false);
     let userData = ref([]);
 
     // Register function
     const register = async () => {
+      log_in_submission.value = true;
+      log_show_alert.value = true;
       if (password.value !== confirmPassword.value) {
         errorMsg.value = "Passwords does not match";
         setTimeout(() => {
@@ -264,6 +269,8 @@ export default {
           });
           if (error) {
             errorMsg.value = error.message;
+            log_in_submission.value = false;
+            log_show_alert.value = false;
           } else {
             statusMsg.value = "Confirm your email to login";
             setTimeout(() => {
@@ -272,6 +279,8 @@ export default {
           }
         } catch (error) {
           errorMsg.value = error.message;
+          log_in_submission.value = false;
+          log_show_alert.value = false;
           setTimeout(() => {
             errorMsg.value = null;
           }, 5000);
@@ -296,6 +305,8 @@ export default {
           console.log(data);
         }, 5000);
       } catch (error) {
+        log_in_submission.value = true;
+        log_show_alert.value = true;
         console.log(error);
       }
     };
@@ -318,6 +329,9 @@ export default {
       handleSignInWithGoogle,
       getUser,
       userData,
+      log_in_submission,
+      log_error,
+      log_show_alert,
     };
   },
   methods: {},
