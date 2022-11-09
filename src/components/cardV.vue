@@ -12,7 +12,7 @@
     </div>
     <router-link to="/component/badge">
       <button
-        class="flex justify-end items-center bg-indigo-700 text-white rounded-md px-8 py-2"
+        class="flex justify-end items-center mt-1 bg-indigo-700 text-white rounded-md px-8 py-2"
       >
         Add Course
       </button>
