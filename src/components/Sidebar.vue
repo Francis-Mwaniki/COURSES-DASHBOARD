@@ -54,13 +54,13 @@
                 to="/component/alert"
                 class="w-full text-left block rounded-md p-3 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                Alert
+                COURSES
               </router-link>
               <router-link
                 to="/component/accordion"
                 class="w-full text-left block rounded-md p-3 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                Accordion
+                Setting
               </router-link>
             </template>
           </menu-accordion>

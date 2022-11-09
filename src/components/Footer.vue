@@ -1,5 +1,4 @@
 <template>
-  <cardV />
   <Accordation />
   <div class="p-4">
     <div class="mt-12 xl:mt-0">
@@ -134,9 +133,8 @@
   </div>
 </template>
 <script>
-import cardV from "../components/cardV.vue";
 import Accordation from "../components/Accordation.vue";
 export default {
-  components: { cardV, Accordation },
+  components: { Accordation },
 };
 </script>

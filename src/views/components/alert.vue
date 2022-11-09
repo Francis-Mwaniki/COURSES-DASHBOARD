@@ -1,22 +1,10 @@
 <template>
-  <!-- Search component Alert with name of type,  press Ctrl + F -->
-
-  <div>alert</div>
+  <cardV />
 </template>
-
 <script>
-import { Icon } from "@iconify/vue";
+import cardV from "../../cardV.vue";
+import Accordation from "../components/Accordation.vue";
 export default {
-  components: {
-    Icon,
-  },
-  mounted() {
-    var alert_dis = document.querySelectorAll(".alert-dismiss");
-    alert_dis.forEach((x) =>
-      x.addEventListener("click", function () {
-        x.parentElement.classList.add("hidden");
-      })
-    );
-  },
+  components: { cardV, Accordation },
 };
 </script>
