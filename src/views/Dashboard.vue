@@ -374,7 +374,7 @@
               <th scope="col" class="uppercase px-6 py-3">Transaction</th>
               <th scope="col" class="uppercase px-6 py-3">Date & Time</th>
               <th scope="col" class="uppercase px-6 py-3">Amount</th>
-              <th scope="col" class="uppercase px-6 py-3">Status</th>
+              <th scope="col" class="uppercase px-6 py-3 md:block hidden">Status</th>
             </tr>
           </thead>
           <tbody>
