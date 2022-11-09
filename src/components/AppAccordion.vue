@@ -27,32 +27,24 @@
       </span>
     </span>
   </button>
-
-  <div
-    v-show="isOpen"
-    :id="`collapse${_uid}`"
-    class="p-3 mt-2 bg-gray-100 dark:bg-gray-700"
-  >
-    <slot name="content" />
-  </div>
 </template>
 
 <script>
-  import { Icon } from "@iconify/vue";
-  export default {
-    data() {
-      return {
-        isOpen: false,
-      };
-    },
+import { Icon } from "@iconify/vue";
+export default {
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
 
-    methods: {
-      toggleAccordion() {
-        this.isOpen = !this.isOpen;
-      },
+  methods: {
+    toggleAccordion() {
+      this.isOpen = !this.isOpen;
     },
-    components: {
-      Icon,
-    },
-  };
+  },
+  components: {
+    Icon,
+  },
+};
 </script>
