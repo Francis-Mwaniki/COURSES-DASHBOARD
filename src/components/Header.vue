@@ -113,7 +113,10 @@
           >
             <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
               <div>Logged As</div>
-              <div class="font-medium truncate">Francis</div>
+              <div class="font-medium truncate" v-if="userData">
+                {{ userData.user_metadata.full_name }}
+              </div>
+              <div class="font-medium truncate" v-else>Anonymous</div>
             </div>
             <ul
               class="py-1 text-sm text-gray-700 dark:text-gray-200"
